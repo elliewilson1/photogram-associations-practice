@@ -15,6 +15,11 @@
 class Photo < ApplicationRecord
   validates(:poster, { :presence => true })
 
+  belongs_to(:poster, foreign_key: "owner_id", class_name: "User")
+  has_many(:comments, foreign_key: "photo_id", class_name: "Comment")
+  has_many(:likes, foreign_key: "photo_id", class_name: "Like")
+  has_many(:fans, :through => :likes, :source => :fan)
+
   # Association accessor methods to define:
   
   ## Direct associations

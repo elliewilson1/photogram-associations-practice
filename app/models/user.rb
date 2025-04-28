@@ -17,6 +17,16 @@ class User < ApplicationRecord
     :uniqueness => { :case_sensitive => false },
   })
 
+  has_many(:comments, foreign_key: "author_id", class_name: "Comment")
+  has_many(:own_photos, foreign_key: "owner_id", class_name: "Photo")
+  has_many(:likes, foreign_key: "fan_id", class_name: "Like")
+  has_many(:sent_follow_requests, foreign_key: "sender_id", class_name: "FollowRequest")
+  has_many(:received_follow_requests, foreign_key: "recipient_id", class_name: "FollowRequest")
+
+  has_many(:liked_photos, :through => :photos, :source => :user)
+  has_many(:commented_photos, :through => :comments, :source => :user)
+
+
   # Association accessor methods to define:
   
   ## Direct associations
