@@ -23,8 +23,8 @@ class User < ApplicationRecord
   has_many(:sent_follow_requests, foreign_key: "sender_id", class_name: "FollowRequest")
   has_many(:received_follow_requests, foreign_key: "recipient_id", class_name: "FollowRequest")
 
-  has_many(:liked_photos, :through => :photos, :source => :user)
-  has_many(:commented_photos, :through => :comments, :source => :user)
+  has_many(:liked_photos, :through => :photos, :source => :photo)
+  has_many(:commented_photos, :through => :comments, :source => :photo)
 
 
   # Association accessor methods to define:
